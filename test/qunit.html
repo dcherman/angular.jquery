@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>angular.jquery</title>
+        <link rel="stylesheet" href="qunit-1.10.0.css">
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        <div id="test" style="display:none" ng-app="test"></div>
+        <script src="qunit-1.10.0.js"></script>
+        <script>
+            var jqVersion = QUnit.urlParams.jquery || "1.9.0";
+            var angularVersion = QUnit.urlParams.angular || "1.1.5";
+            
+            document.write( "<scri" + "pt src='http://code.jquery.com/jquery-" + jqVersion + ".js'></scri" + "pt>" );
+            document.write( "<scri" + "pt src='http://ajax.googleapis.com/ajax/libs/angularjs/" + angularVersion + "/angular.min.js'></scri" + "pt> " );
+            
+            // Don't assert the version of jQuery in git.  It's always changing, and we don't want to have to keep this up to date.
+            if ( jqVersion !== "git" ) {
+                test( "jQuery Version", function() {
+                    expect(1);
+                    strictEqual( jQuery.fn.jquery, jqVersion, "The correct version of jQuery ( " + jqVersion + " ) is being tested" );
+                });
+            }
+
+            test( "Angular Version", function() {
+                expect(1);
+                strictEqual( angular.version.full, angularVersion, "The correct version of angular ( " + angularVersion + " ) is being tested" );
+            });
+
+        </script>
+        <script src="angular-mocks.js"></script>
+        <script src="jquery.mockjax.js"></script>
+        <script src="../angular.jquery.js"></script>
+        <script src="sinon-1.7.3.js"></script>
+        <script src="test.js"></script>
+    </body>
+</html>
